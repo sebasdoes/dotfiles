@@ -1,0 +1,23 @@
+[global_config]
+[keybindings]
+  cycle_next = <Primary><Alt>Tab
+  cycle_prev = <Primary><Shift><Alt>Tab
+  next_tab = <Primary>Tab
+  prev_tab = <Primary><Shift>Tab
+[profiles]
+  [[default]]
+    background_color = "#121212"
+    font = Source Code Pro for Powerline Medium 14
+    foreground_color = "#ffffdf"
+    scrollback_infinite = True
+    palette = "#121212:#d75f5f:#5f8787:#dfaf87:#af875f:#875f5f:#87afaf:#ffffdf:#585858:#d75f5f:#5f8787:#dfaf87:#af875f:#875f5f:#87afaf:#ffffdf"
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]

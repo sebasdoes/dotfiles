@@ -1,0 +1,95 @@
+{
+	"margin-top": 8,
+	"height": 65,
+	"layer": "top",
+	"modules-center": [
+		"wlr/workspaces",
+		"tray",
+		"cpu",
+		"memory",
+		"pulseaudio",
+		"network",
+    "bluetooth",
+		"clock",
+		"custom/time",
+		"custom/power-menu"
+	],
+
+	"cpu": {
+		"interval": 10,
+		"format": "  {}%"
+	},
+
+	"memory": {
+		"interval": 30,
+		"format": "  {}%",
+		"format-alt": "  {used:0.1f}G"
+	},
+
+	"hyprland/language": {
+		"format": "  {}",
+	},
+
+  "network": {
+      "format-wifi": "直 {signalStrength}%",
+      "format-ethernet": " wired",
+      "format-disconnected": "睊",
+      "on-click": "",
+      "format-disconnected": "Disconnected  ",
+  },
+
+  "bluetooth": {
+      "on-click": "blueman-manager",
+      "format": " {status}",
+  },
+
+	"wlr/workspaces": {
+		"disable-scroll": true,
+		"all-outputs": true,
+		"format": "{icon}",
+		"on-scroll-up": "hyprctl dispatch workspace e+1",
+		"on-scroll-down": "hyprctl dispatch workspace e-1",
+		"on-click": "activate",
+		"format-icons": {
+			"1": "一",
+			"2": "二",
+			"3": "三",
+			"4": "四",
+			"5": "五",
+			"6": "六",
+			"7": "七",
+			"8": "八",
+			"9": "九",
+			"10": "十"
+		}
+	},
+
+	"tray": {
+		"icon-size": 18,
+		"spacing": 5
+	},
+
+	"clock": {
+		"format": "{:  %a, %d %b %Y}"
+	},
+
+	"pulseaudio": {
+		"scroll-step": 1,
+		"format": "{icon}  {volume}%",
+		"format-muted": "婢",
+		"format-icons": {
+			"default": ["奄", "奔", "墳"]
+		},
+		"on-click": "pavucontrol"
+	},
+   
+  "custom/power-menu": {
+      "format": " ⏻ ",
+      "on-click": "wlogout",
+  }, 
+
+	"custom/time": {
+		"exec": "sh ~/.config/waybar/scripts/getTime.sh",
+		"restart-interval": 60
+	}
+}
