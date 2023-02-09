@@ -19,12 +19,12 @@ window:
   dimensions:
     columns: 80
     lines: 35
-  opacity: 0.5
+  opacity: 0.9  
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
-  history: 1000
+  history: 50000
 
   # Scrolling distance multiplier.
   multiplier: 3
@@ -39,7 +39,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: 'Source Code Pro for Powerline'
+    family: 'Hack Nerd Font Mono'
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -50,7 +50,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: 'Source Code Pro for Powerline'
+    family: 'Hack Nerd Font Mono'
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -61,7 +61,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: 'Source Code Pro for Powerline'
+    family: 'Hack Nerd Font Mono'
 
     # The `style` can be specified to pick a specific face.
     style: Italic
