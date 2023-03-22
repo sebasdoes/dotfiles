@@ -1,15 +1,22 @@
--- setup packer
-local fn = vim.fn
-local install_path = fn.stdpath "data" .. "/site/pack/packer/opt/packer.nvim"
+require "core"
 
-if fn.empty(fn.glob(install_path)) > 0 then
-  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1e222a" })
-  print "Cloning packer for first run.."
-  fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
-  vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
+local custom_init_path = vim.api.nvim_get_runtime_file("lua/custom/init.lua", false)[1]
+
+if custom_init_path then
+  dofile(custom_init_path)
 end
 
+require("core.utils").load_mappings()
 
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
--- setup plugins
-require('plugins')
+-- bootstrap lazy.nvim!
+if not vim.loop.fs_stat(lazypath) then
+  require("core.bootstrap").gen_chadrc_template()
+  require("core.bootstrap").lazy(lazypath)
+end
+
+vim.opt.rtp:prepend(lazypath)
+require "plugins"
+
+dofile(vim.g.base46_cache .. "defaults")
