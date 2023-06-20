@@ -5,6 +5,7 @@ format = """
 $directory\
 [\uE0BA](fg:#3a454e bg:#6f282e)\
 $git_branch\
+$git_status\
 $python\
 [](fg:#3a454e bg:#86BBD8)\
 $c\
@@ -26,7 +27,6 @@ $character\
 #$time\
 #$username\
 #[\uE0BA](fg:#6f282e bg:#3a454e)\
-#$git_status\
 
 add_newline = true
 right_format = "$cmd_duration"
@@ -61,8 +61,8 @@ truncation_length = 2
 truncation_symbol = "…/"
 
 [directory.substitutions]
-"Documents" = " "
-"Documentos" = " "
+"Documents" = "󰈙 "
+"Documentos" = "󰈙 "
 "Downloads" = " "
 "Descargas" = " "
 "Music" = " "
@@ -94,9 +94,9 @@ symbol = ""
 style = "bg:#3a454e fg:#000000"
 format = '[ $symbol $branch ]($style)'
 
-#[git_status]
-#style = "bg:#FCA17D fg:#000000"
-#format = '[$all_status$ahead_behind ]($style)'
+[git_status]
+style = "bg:#3a454e fg:#000000"
+format = '[$all_status$ahead_behind ]($style)'
 
 [golang]
 symbol = " "
