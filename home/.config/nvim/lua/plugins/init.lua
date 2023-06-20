@@ -26,7 +26,9 @@ local default_plugins = {
 
   {
     "NvChad/nvterm",
-    init = require("core.utils").load_mappings "nvterm",
+    init = function()
+      require("core.utils").load_mappings "nvterm"
+    end,
     config = function(_, opts)
       require "base46.term"
       require("nvterm").setup(opts)
@@ -35,7 +37,9 @@ local default_plugins = {
 
   {
     "NvChad/nvim-colorizer.lua",
-    init = require("core.utils").lazy_load "nvim-colorizer.lua",
+    init = function()
+      require("core.utils").lazy_load "nvim-colorizer.lua"
+    end,
     config = function(_, opts)
       require("colorizer").setup(opts)
 
@@ -74,14 +78,16 @@ local default_plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    init = require("core.utils").lazy_load "nvim-treesitter",
+    init = function()
+      require("core.utils").lazy_load "nvim-treesitter"
+    end,
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     opts = function()
       return require "plugins.configs.treesitter"
     end,
     config = function(_, opts)
-      pcall(dofile, vim.g.base46_cache .. "syntax")
+      dofile(vim.g.base46_cache .. "syntax")
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
@@ -95,7 +101,7 @@ local default_plugins = {
       vim.api.nvim_create_autocmd({ "BufRead" }, {
         group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
         callback = function()
-          vim.fn.system("git -C " .. vim.fn.expand "%:p:h" .. " rev-parse")
+          vim.fn.system("git -C " .. '"' .. vim.fn.expand "%:p:h" .. '"' .. " rev-parse")
           if vim.v.shell_error == 0 then
             vim.api.nvim_del_augroup_by_name "GitSignsLazyLoad"
             vim.schedule(function()
@@ -129,12 +135,16 @@ local default_plugins = {
       vim.api.nvim_create_user_command("MasonInstallAll", function()
         vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed, " "))
       end, {})
+
+      vim.g.mason_binaries_list = opts.ensure_installed
     end,
   },
 
   {
     "neovim/nvim-lspconfig",
-    init = require("core.utils").lazy_load "nvim-lspconfig",
+    init = function()
+      require("core.utils").lazy_load "nvim-lspconfig"
+    end,
     config = function()
       require "plugins.configs.lspconfig"
     end,
@@ -149,8 +159,9 @@ local default_plugins = {
         -- snippet plugin
         "L3MON4D3/LuaSnip",
         dependencies = "rafamadriz/friendly-snippets",
-        config = function()
-          require("plugins.configs.others").luasnip()
+        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        config = function(_, opts)
+          require("plugins.configs.others").luasnip(opts)
         end,
       },
 
@@ -191,7 +202,9 @@ local default_plugins = {
   {
     "numToStr/Comment.nvim",
     -- keys = { "gc", "gb" },
-    init = require("core.utils").load_mappings "comment",
+    init = function()
+      require("core.utils").load_mappings "comment"
+    end,
     config = function()
       require("Comment").setup()
     end,
@@ -201,20 +214,25 @@ local default_plugins = {
   {
     "nvim-tree/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    init = require("core.utils").load_mappings "nvimtree",
+    init = function()
+      require("core.utils").load_mappings "nvimtree"
+    end,
     opts = function()
       return require "plugins.configs.nvimtree"
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "nvimtree")
       require("nvim-tree").setup(opts)
+      vim.g.nvimtree_side = opts.view.side
     end,
   },
 
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    init = require("core.utils").load_mappings "telescope",
+    init = function()
+      require("core.utils").load_mappings "telescope"
+    end,
 
     opts = function()
       return require "plugins.configs.telescope"
@@ -236,7 +254,9 @@ local default_plugins = {
   {
     "folke/which-key.nvim",
     keys = { "<leader>", '"', "'", "`" },
-    init = require("core.utils").load_mappings "whichkey",
+    init = function()
+      require("core.utils").load_mappings "whichkey"
+    end,
     opts = function()
       return require "plugins.configs.whichkey"
     end,
@@ -253,7 +273,4 @@ if #config.plugins > 0 then
   table.insert(default_plugins, { import = config.plugins })
 end
 
--- lazy_nvim startup opts
-local lazy_config = vim.tbl_deep_extend("force", require "plugins.configs.lazy_nvim", config.lazy_nvim)
-
-require("lazy").setup(default_plugins, lazy_config)
+require("lazy").setup(default_plugins, config.lazy_nvim)
