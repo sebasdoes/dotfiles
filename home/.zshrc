@@ -53,7 +53,7 @@ alias vpn='sudo -b /opt/homebrew/bin/openfortivpn -c /usr/local/etc/openfortivpn
 
 
 # Modules
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$($(which brew) shellenv)"
 eval "$(starship init zsh)"
 
 # Autocomplete
@@ -67,7 +67,10 @@ then
 fi
 
 ## Load Angular CLI autocompletion.
-source <(ng completion script)
+if $(which ng >/dev/null); then
+  source <(ng completion script)
+fi
+
 
 # Autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
