@@ -14,6 +14,7 @@
 # Remove older command from the history if a duplicate is to be added.
 setopt HIST_IGNORE_ALL_DUPS
 
+setopt incappendhistory
 #
 # Input/output
 #
@@ -37,10 +38,6 @@ WORDCHARS=${WORDCHARS//[\/]}
 PATH="$HOME/.local/bin:$PATH"
 
 # Aliases
-#alias l="gls -Flha --group-directories-first"
-#alias ll="gls -Flh --group-directories-first"
-
-#alias l='colorls --sort-dirs -1'
 alias ls="exa"
 alias ll='exa -lg --icons --group-directories-first'
 alias l='exa -lga --icons --group-directories-first'
@@ -53,8 +50,12 @@ alias vpn='sudo -b /opt/homebrew/bin/openfortivpn -c /usr/local/etc/openfortivpn
 
 
 # Modules
-eval "$($(which brew) shellenv)"
-eval "$(starship init zsh)"
+if $(which brew >/dev/null); then
+  eval "$($(which brew) shellenv)"
+fi
+if $(which starship >/dev/null); then
+  eval "$(starship init zsh)"
+fi
 
 # Autocomplete
 autoload -U +X bashcompinit && bashcompinit
@@ -66,15 +67,20 @@ then
   compinit
 fi
 
+# Autosuggestions
+if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+
 ## Load Angular CLI autocompletion.
 if $(which ng >/dev/null); then
   source <(ng completion script)
 fi
 
 
-# Autosuggestions
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 
 # Needs to be at the end
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
