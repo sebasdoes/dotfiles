@@ -38,21 +38,40 @@ WORDCHARS=${WORDCHARS//[\/]}
 PATH="$HOME/.local/bin:$PATH"
 
 # Aliases
-alias ls="exa"
-alias ll='exa -lg --icons --group-directories-first'
-alias l='exa -lga --icons --group-directories-first'
+if $(which exa >/dev/null); then
+  alias ls="exa"
+  alias ll='exa -lg --icons --group-directories-first'
+  alias l='exa -lga --icons --group-directories-first'
+else
+  alias ll="ls -l"
+  alias l="ls -la"
+fi
 
-alias cat="bat --paging=never --style=changes"
+if $(which bat >/dev/null); then
+  alias cat="bat --paging=never --style=changes"
+fi
+if $(which batcat >/dev/null); then
+  alias cat="bat --paging=never --style=changes"
+fi
 
 alias kgp="kubectl get pods"
-alias vim="nvim"
+alias kge="kubectl get events --sort-by=.metadata.creationTimestamp"
+
+if $(which nvim >/dev/null); then
+  alias vim="nvim"
+fi
+
 alias vpn='sudo -b /opt/homebrew/bin/openfortivpn -c /usr/local/etc/openfortivpn/config -o '
 
+if $(which kitty >/dev/null); then
+  alias ssh="kitty +kitten ssh"
+fi
 
 # Modules
 if $(which brew >/dev/null); then
   eval "$($(which brew) shellenv)"
 fi
+
 if $(which starship >/dev/null); then
   eval "$(starship init zsh)"
 fi
