@@ -45,11 +45,13 @@ alias l='exa -lga --icons --group-directories-first'
 alias cat="bat --paging=never --style=changes"
 
 alias kgp="kubectl get pods"
-alias vim="nvim"
 alias vpn='sudo -b /opt/homebrew/bin/openfortivpn -c /usr/local/etc/openfortivpn/config -o '
 
 
 # Modules
+if $(which nvim >/dev/null); then
+  alias vim="nvim"
+fi
 if $(which brew >/dev/null); then
   eval "$($(which brew) shellenv)"
 fi
