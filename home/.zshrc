@@ -38,40 +38,21 @@ WORDCHARS=${WORDCHARS//[\/]}
 PATH="$HOME/.local/bin:$PATH"
 
 # Aliases
-if $(which exa >/dev/null); then
-  alias ls="exa"
-  alias ll='exa -lg --icons --group-directories-first'
-  alias l='exa -lga --icons --group-directories-first'
-else
-  alias ll="ls -l"
-  alias l="ls -la"
-fi
+alias ls="exa"
+alias ll='exa -lg --icons --group-directories-first'
+alias l='exa -lga --icons --group-directories-first'
 
-if $(which bat >/dev/null); then
-  alias cat="bat --paging=never --style=changes"
-fi
-if $(which batcat >/dev/null); then
-  alias cat="bat --paging=never --style=changes"
-fi
+alias cat="bat --paging=never --style=changes"
 
 alias kgp="kubectl get pods"
-alias kge="kubectl get events --sort-by=.metadata.creationTimestamp"
-
-if $(which nvim >/dev/null); then
-  alias vim="nvim"
-fi
-
+alias vim="nvim"
 alias vpn='sudo -b /opt/homebrew/bin/openfortivpn -c /usr/local/etc/openfortivpn/config -o '
 
-if $(which kitty >/dev/null); then
-  alias ssh="kitty +kitten ssh"
-fi
 
 # Modules
 if $(which brew >/dev/null); then
   eval "$($(which brew) shellenv)"
 fi
-
 if $(which starship >/dev/null); then
   eval "$(starship init zsh)"
 fi
@@ -87,6 +68,9 @@ then
 fi
 
 # Autosuggestions
+if [ ! -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  ~/.local/bin/git_clone_if_needed -o 1 https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions &>/dev/null
+fi
 if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
@@ -100,6 +84,9 @@ fi
 
 
 # Needs to be at the end
+if [ ! -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  ~/.local/bin/git_clone_if_needed -o 1 https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting &>/dev/null
+fi
 if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
