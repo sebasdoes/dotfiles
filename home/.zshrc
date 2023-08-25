@@ -40,6 +40,7 @@ PATH="$HOME/.local/bin:$PATH"
 # Aliases
 
 
+alias root="sudo -u root -E zsh"
 alias kgp="kubectl get pods"
 alias vpn='sudo -b /opt/homebrew/bin/openfortivpn -c /usr/local/etc/openfortivpn/config -o '
 
