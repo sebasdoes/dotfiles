@@ -12,9 +12,13 @@
 #
 
 # Remove older command from the history if a duplicate is to be added.
+HISTSIZE=12000
+SAVEHIST=10000
+HISTFILE=~/.zhistory
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY 
 setopt HIST_IGNORE_ALL_DUPS
 
-setopt incappendhistory
 #
 # Input/output
 #
@@ -46,6 +50,8 @@ alias vpn='sudo -b /opt/homebrew/bin/openfortivpn -c /usr/local/etc/openfortivpn
 
 
 # Modules
+plugins=(git ssh-agent)
+
 if $(which exa >/dev/null); then
   alias ls="exa"
   alias ll='exa -lg --icons --group-directories-first'
