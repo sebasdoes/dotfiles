@@ -55,6 +55,10 @@ else
   alias l='ls -la'
 fi
 
+if $(which bw >/dev/null); then
+  alias bw_sshkeys="NODE_EXTRA_CA_CERTS=\"${HOME}/.local/lan_comp.crt\" bw_add_ssh_keys"
+fi
+
 if $(which bat >/dev/null); then
   alias cat="bat --paging=never --style=changes"
 fi
