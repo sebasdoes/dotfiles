@@ -1,13 +1,12 @@
 # macOS
 
 ```shell
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+
 brew install starship
 brew install exa
 brew install bat
-brew install openfortivpn
 brew install nvim
 
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
-
+./restore_shell.sh
 ```
