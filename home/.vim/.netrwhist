@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/home/sebas/.config/.git'
+let g:netrw_dirhist_9='/home/sebas/git/ansible_collections/expereo/icinga/roles/web/templates'
+let g:netrw_dirhist_8='/home/sebas/.config/wireplumber/policy.lua.d'
+let g:netrw_dirhist_7='/home/sebas/git/expereo_check_toolkit/.git'
+let g:netrw_dirhist_6='/home/sebas/.config/alacritty'
+let g:netrw_dirhist_5='/home/sebas/git/perfcheck/.git'
+let g:netrw_dirhist_4='/home/sebas/git/expereo_diffsync_toolkit/.git'
+let g:netrw_dirhist_3='/home/sebas/.config/microsoft-edge/Default'
+let g:netrw_dirhist_2='/home/sebas/git'
+let g:netrw_dirhist_1='/home/sebas/git/golden-config-templates/velocloud_cloud-fabric-pgw'

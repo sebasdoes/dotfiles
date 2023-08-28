@@ -50,8 +50,6 @@ alias vpn='sudo -b /opt/homebrew/bin/openfortivpn -c /usr/local/etc/openfortivpn
 
 
 # Modules
-plugins=(git ssh-agent)
-
 if $(which exa >/dev/null); then
   alias ls="exa"
   alias ll='exa -lg --icons --group-directories-first'
@@ -69,9 +67,9 @@ if $(which bat >/dev/null); then
   alias cat="bat --paging=never --style=changes"
 fi
 
-if $(which nvim >/dev/null); then
-  alias vim="nvim"
-fi
+#if $(which nvim >/dev/null); then
+#  alias vim="nvim"
+#fi
 
 if $(which kitty >/dev/null); then
   alias ssho="$(which ssh)"
@@ -85,6 +83,22 @@ fi
 
 if $(which starship >/dev/null); then
   eval "$(starship init zsh)"
+fi
+
+# Run SSH-agent for arch with systemd version of ssh agent
+if [ -S "/run/user/$(id -u)/ssh-agent.socket" ]; then
+  export SSH_AUTH_SOCK="/run/user/$(id -u)/ssh-agent.socket"
+fi
+
+# Awesome VIM: https://github.com/amix/vimrc
+if [ ! -d ~/.vim_runtime ]; then
+  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime &>/dev/null
+  ln -s ~/.config/vim_configs.vim ~/.vim_runtime/my_configs.vim
+fi
+
+if [ ! -d ~/.config/nvim ]; then
+  git clone --depth=1 https://github.com/NvChad/NvChad  ~/.config/nvim &>/dev/null
+  ln -s ~/.config/nvim-custom ~/.config/nvim/lua/custom
 fi
 
 # Autocomplete
