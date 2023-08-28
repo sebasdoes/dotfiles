@@ -63,6 +63,12 @@ if $(which nvim >/dev/null); then
   alias vim="nvim"
 fi
 
+if $(which kitty >/dev/null); then
+  alias ssho="$(which ssh)"
+  alias ssh="kitty +kitten ssh"
+  alias e="edit-in-kitty --type tab" 
+fi
+
 if $(which brew >/dev/null); then
   eval "$($(which brew) shellenv)"
 fi
