@@ -19,6 +19,7 @@ $java\
 $julia\
 $nodejs\
 $nim\
+$python\
 $rust\
 $scala\
 [](fg:#86BBD8 bg:#06969A)\
@@ -36,7 +37,7 @@ $time\
 [username]
 show_always = true
 style_user = "bg:#9A348E"
-style_root = "bg:#9A348E"
+style_root = "bg:#9A348E black"
 format = '[$user ]($style)'
 disabled = false
 
@@ -134,6 +135,11 @@ format = '[ $symbol ($version) ]($style)'
 symbol = "󰆥 "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
+
+[python]
+python_binary = ["./venv/bin/python", "python3", "python", "python2"]
+style = "bg:#86BBD8 black"
+format = '[ $symbol ($virtualenv) ]($style)'
 
 [rust]
 symbol = ""
