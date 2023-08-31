@@ -90,12 +90,7 @@ if [ -S "/run/user/$(id -u)/ssh-agent.socket" ]; then
   export SSH_AUTH_SOCK="/run/user/$(id -u)/ssh-agent.socket"
 fi
 
-# Awesome VIM: https://github.com/amix/vimrc
-if [ ! -d ~/.vim_runtime ]; then
-  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime &>/dev/null
-  ln -s ~/.config/vim_configs.vim ~/.vim_runtime/my_configs.vim
-fi
-
+# NvChad
 if [ ! -d ~/.config/nvim ]; then
   git clone --depth=1 https://github.com/NvChad/NvChad  ~/.config/nvim &>/dev/null
   ln -s ~/.config/nvim-custom ~/.config/nvim/lua/custom
