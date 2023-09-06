@@ -50,7 +50,7 @@ alias vpn='sudo -b /opt/homebrew/bin/openfortivpn -c /usr/local/etc/openfortivpn
 
 
 # Modules
-if $(which exa >/dev/null); then
+if $(which exa &>/dev/null); then
   alias ls="exa"
   alias ll='exa -lg --icons --group-directories-first'
   alias l='exa -lga --icons --group-directories-first'
@@ -59,11 +59,11 @@ else
   alias l='ls -la'
 fi
 
-if $(which bw >/dev/null); then
+if $(which bw &>/dev/null); then
   alias bw_sshkeys="NODE_EXTRA_CA_CERTS=\"${HOME}/.local/lan_comp.crt\" bw_add_ssh_keys"
 fi
 
-if $(which bat >/dev/null); then
+if $(which bat &>/dev/null); then
   alias cat="bat --paging=never --style=changes"
 fi
 
@@ -71,17 +71,17 @@ fi
 #  alias vim="nvim"
 #fi
 
-if $(which kitty >/dev/null); then
+if $(which kitty &>/dev/null); then
   alias ssho="$(which ssh)"
   alias ssh="kitty +kitten ssh"
   alias e="edit-in-kitty --type tab" 
 fi
 
-if $(which brew >/dev/null); then
+if $(which brew &>/dev/null); then
   eval "$($(which brew) shellenv)"
 fi
 
-if $(which starship >/dev/null); then
+if $(which starship &>/dev/null); then
   eval "$(starship init zsh)"
 fi
 
@@ -116,7 +116,7 @@ fi
 
 
 ## Load Angular CLI autocompletion.
-if $(which ng >/dev/null); then
+if $(which ng &>/dev/null); then
   source <(ng completion script)
 fi
 
