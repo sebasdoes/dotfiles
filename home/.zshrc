@@ -46,11 +46,14 @@ PATH="$HOME/.local/bin:$PATH"
 
 alias root="sudo -u root --preserve-env='SSH_CONNECTION' zsh"
 alias kgp="kubectl get pods"
-alias vpn='sudo -b /opt/homebrew/bin/openfortivpn -c /usr/local/etc/openfortivpn/config -o '
 
 
 # Modules
-if $(which exa &>/dev/null); then
+if $(which eza &>/dev/null); then
+  alias ls="eza"
+  alias ll='eza -lg --icons --group-directories-first'
+  alias l='eza -lga --icons --group-directories-first'
+elif $(which exa &>/dev/null); then
   alias ls="exa"
   alias ll='exa -lg --icons --group-directories-first'
   alias l='exa -lga --icons --group-directories-first'
@@ -79,6 +82,9 @@ fi
 
 if $(which brew &>/dev/null); then
   eval "$($(which brew) shellenv)"
+  if $(which openfortivpn &>/dev/null); then
+    alias vpn='sudo -b /opt/homebrew/bin/openfortivpn -c /usr/local/etc/openfortivpn/config -o '
+  fi
 fi
 
 if $(which starship &>/dev/null); then
