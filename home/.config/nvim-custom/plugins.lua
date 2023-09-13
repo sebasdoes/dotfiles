@@ -32,14 +32,6 @@ local plugins = {
     config = function() end, -- Override to setup mason-lspconfig
   },
 
-  -- {
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --    after = "nvim-lspconfig",
-  --    config = function()
-  --       require "custom.configs.null-ls"
-  --    end,
-  -- },
-
   -- overrde plugin configs
   {
     "nvim-treesitter/nvim-treesitter",
@@ -60,17 +52,11 @@ local plugins = {
     end,
   },
 
-  -- To make a plugin not be loaded
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   enabled = false
-  -- },
+  {
+    "f-person/git-blame.nvim",
+    lazy = false,
+  },
 
-  -- Uncomment if you want to re-enable which-key
-  -- {
-  --   "folke/which-key.nvim",
-  --   enabled = true,
-  -- },
 }
 
 return plugins
