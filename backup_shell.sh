@@ -3,6 +3,7 @@ mkdir -p home/.vim
 
 ## Folders
 cp -R ~/.config/terminator home/.config/
+cp -R ~/.config/kitty home/.config/
 cp -R ~/.config/nvim-custom home/.config/
 cp -R ~/.vim/colors home/.vim/
 
