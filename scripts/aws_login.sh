@@ -8,7 +8,7 @@ do
 done
 
 echo $env
-saml_login login -e $env -p $env 
+saml_login login -e $env -p $env -i 
 export AWS_PROFILE=$env
 
 aws ecr get-login-password | docker login -u AWS --password-stdin "https://$(aws sts get-caller-identity --query 'Account' --output text).dkr.ecr.eu-central-1.amazonaws.com"
