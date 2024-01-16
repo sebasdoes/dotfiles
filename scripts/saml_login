@@ -1,0 +1,158 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+# set -x
+
+function usage {
+  echo "saml_login - configure and/or login to AWS via AD"
+  echo ""
+  echo "saml_login config  [-t type] [-e env] [-p profile] [-u username] [-r role] [-d duration (seconds)]"
+  echo ""
+  echo "-t type (AzureAD) -- default AzureAD"
+  echo "-e env (test, prod, rnd, infra)"
+  echo "-p AWS profile (default, expereoapi-test, infra-test, infra-prod)"
+  echo "-u username"
+  echo "-r role"
+  echo "-d session duration"
+  echo ""
+  echo "saml_login login [-i] [-t type] [-e env] [-p profile]"
+  echo ""
+  echo "-i prompt (for user and password) -- default disabled"
+  echo "-t type (AzureAD) -- default AzureAD"
+  echo "-e env (test, prod, rnd, infra)"
+  echo "-p AWS profile (default, expereoapi-test, infra-test, infra-prod)"
+  echo ""
+  echo "Config: saml_login config -e test -p default -u nugroho.saputro@expereo.com"
+  echo "Login: saml_login login -i -e test -p default"
+  exit 1
+}
+
+if [ "$#" -lt 1 ]; then
+  usage
+fi
+
+# Make sure you have saml2aws in your PATH
+EXEC="saml2aws"
+ENV_NAME=""
+PROFILE=""
+USERNAME=""
+ROLE=""
+DURATION=""
+PROVIDER="AzureAD"
+PROMPT="--skip-prompt"
+
+# configure or login
+subcommand=$1
+shift
+
+# Parse options
+while getopts "t:e:p:u:r:d:i" opt; do
+  case ${opt} in
+    e)
+      ENV_NAME=$OPTARG
+      ;;
+    p)
+      PROFILE=$OPTARG
+      ;;
+    t)
+      PROVIDER=$OPTARG
+      ;;
+    u)
+      USERNAME=$OPTARG
+      ;;
+    r)
+      ROLE=$OPTARG
+      ;;
+    d)
+      DURATION=$OPTARG
+      ;;
+    i)
+      PROMPT=""
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      usage
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      usage
+      ;;
+  esac
+done
+
+if [[ -z $ENV_NAME || "test,prod,rnd,infra" != *"$ENV_NAME"* ]]; then
+  echo "Invalid environment argument"
+  usage
+fi
+
+if [[ -n $PROVIDER && "AzureAD" != *"$PROVIDER"* ]]; then
+  echo "Invalid login type"
+  usage
+fi
+
+if [[ -n $USERNAME ]]; then
+  USERNAME="--username=$USERNAME"
+fi
+
+PROVIDER_URL=""
+APP_ID=""
+
+if [[ -n $DURATION ]]; then
+  DURATION="--session-duration=$DURATION"
+else
+  if [ "$ENV_NAME" == "prod" ]; then
+    DURATION="--session-duration=3600"
+  elif [ "$ENV_NAME" == "rnd" ]; then
+    DURATION="--session-duration=3600"
+  elif [ "$ENV_NAME" == "infra" ]; then
+    DURATION="--session-duration=3600"
+  elif [ "$ENV_NAME" == "test" ]; then
+    DURATION="--session-duration=14400"
+  else
+    # default to 1hr
+    DURATION="--session-duration=3600"
+  fi
+fi
+
+if [ "$PROVIDER" == "AzureAD" ]; then
+  PROVIDER_URL="https://account.activedirectory.windowsazure.com"
+  if [ "$ENV_NAME" == "prod" ]; then
+    APP_ID="--app-id=2d12a154-3c0e-40b8-9a07-277a705739e1"
+  elif [ "$ENV_NAME" == "rnd" ]; then
+    APP_ID="--app-id=5b78e02f-d97b-4401-a529-5dfaf70c3bc1"
+  elif [ "$ENV_NAME" == "infra" ]; then
+    APP_ID="--app-id=2a7c8421-42c0-4c21-8511-5d41a62938f5"
+  elif [ "$ENV_NAME" == "test" ]; then
+    APP_ID="--app-id=f16e5987-9b84-415e-8404-d179261ed4df"
+  fi
+else
+  # default to test env
+  APP_ID="--app-id=f16e5987-9b84-415e-8404-d179261ed4df"
+fi
+
+if [[ -n $ROLE ]]; then
+  if [ "$ENV_NAME" == "prod" ]; then
+    ROLE="--role=arn:aws:iam::141530814435:role/$ROLE"
+  elif [ "$ENV_NAME" == "rnd" ]; then
+    ROLE="--role=arn:aws:iam::345578604350:role/$ROLE"
+  elif [ "$ENV_NAME" == "infra" ]; then
+    ROLE="--role=arn:aws:iam::837096761490:role/$ROLE"
+  else
+    # test ENV
+    ROLE="--role=arn:aws:iam::635062212119:role/$ROLE"
+  fi
+fi
+
+IDP_NAME="$PROVIDER--$ENV_NAME--$PROFILE"
+
+# state your business
+if [ "$subcommand" == "config" ]; then
+  eval "$EXEC configure --idp-provider=$PROVIDER --mfa=Auto --url=$PROVIDER_URL $APP_ID $PROMPT -a $IDP_NAME --region eu-central-1 --profile=$PROFILE $USERNAME $ROLE $DURATION --quiet"
+  echo "Your profile has been saved as $IDP_NAME to .saml2aws"
+elif [ "$subcommand" == "login" ]; then
+  eval "$EXEC login -a $IDP_NAME $PROMPT"
+  echo ""
+  echo "AWS Profile $PROFILE has been updated. You can use the following command so AWS CLI will use the profile for execution."
+  echo " export AWS_PROFILE=$PROFILE"
+fi
+
