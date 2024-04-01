@@ -96,12 +96,6 @@ if [ -S "/run/user/$(id -u)/ssh-agent.socket" ]; then
   export SSH_AUTH_SOCK="/run/user/$(id -u)/ssh-agent.socket"
 fi
 
-# NvChad
-if [ ! -d ~/.config/nvim ]; then
-  git clone --depth=1 https://github.com/NvChad/NvChad  ~/.config/nvim &>/dev/null
-  ln -s ~/.config/nvim-custom ~/.config/nvim/lua/custom
-fi
-
 # Autocomplete
 autoload -U +X bashcompinit && bashcompinit
 if type brew &>/dev/null

@@ -5,7 +5,7 @@ mkdir -p ~/.vim_runtime
 ## Folders
 cp -R home/.config/terminator ~/.config/
 cp -R home/.config/kitty ~/.config/
-cp -R home/.config/nvim-custom ~/.config/
+cp -R home/.config/nvim ~/.config/
 cp -R home/.vim/colors ~/.vim/
 
 ## Files
