@@ -7,6 +7,8 @@ brew install starship
 brew install eza
 brew install bat
 brew install nvim
+brew install mdcat
+brew install bitwarden-cli
 
 ./restore_shell.sh
 ```
