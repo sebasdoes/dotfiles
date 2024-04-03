@@ -123,4 +123,4 @@ disabled = false
 disabled = false
 time_format = "%R" # Hour:Minute Format
 style = "bg:#00d4ff fg:#040040 bold"
-format = '[ ♥ $time ]($style)'
+format = '[ $time ]($style)'
