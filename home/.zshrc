@@ -67,7 +67,8 @@ if $(which bw &>/dev/null); then
 fi
 
 if $(which bat &>/dev/null); then
-  alias cat="bat --paging=never --style=changes"
+  alias bat="bat --paging=never --style=auto"
+  alias cat="bat --paging=never -p"
 fi
 
 #if $(which nvim >/dev/null); then
