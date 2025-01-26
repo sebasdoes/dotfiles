@@ -10,6 +10,9 @@ brew install nvim
 brew install mdcat
 brew install bitwarden-cli
 
+brew tap theseal/ssh-askpass
+brew install michaelroosz/ssh/libsk-libfido2-install
+
 ./restore_shell.sh
 ```
 
