@@ -11,6 +11,11 @@ call plug#begin()
 Plug 'prabirshrestha/vim-lsp'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'rstacruz/vim-closer'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -34,6 +39,9 @@ set noswapfile
 """""""
 let mapleader = ","
 
+" NERDTree
+nnoremap <leader>n :NERDTreeToggle<CR>
+
 " Fast saving
 nmap <leader>w :w!<cr>
 
@@ -52,13 +60,6 @@ nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-if has("mac") || has("macunix")
-  nmap <D-j> <M-j>
-  nmap <D-k> <M-k>
-  vmap <D-j> <M-j>
-  vmap <D-k> <M-k>
-endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -101,6 +102,9 @@ set tm=500
 
 " Add a bit extra margin to the left
 set foldcolumn=0
+
+" Automatically show indent guides
+let g:indent_guides_enable_on_vim_startup = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
