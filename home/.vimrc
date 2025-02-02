@@ -17,6 +17,7 @@ Plug 'rstacruz/vim-closer'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-endwise'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -24,6 +25,7 @@ autocmd VimEnter *
       \  if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
   \|   PlugInstall | q
   \| endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
