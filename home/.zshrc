@@ -93,7 +93,9 @@ if $(which starship &>/dev/null); then
 fi
 
 # Run SSH-agent for arch with systemd version of ssh agent
-if [ -S "/run/user/$(id -u)/ssh-agent.socket" ]; then
+if [ -S "${HOME}/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock" ]; then
+  export SSH_AUTH_SOCK="${HOME}/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock"
+elif [ -S "/run/user/$(id -u)/ssh-agent.socket" ]; then
   export SSH_AUTH_SOCK="/run/user/$(id -u)/ssh-agent.socket"
 fi
 
@@ -120,8 +122,6 @@ fi
 if $(which ng &>/dev/null); then
   source <(ng completion script)
 fi
-
-
 
 # Needs to be at the end
 if [ ! -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
