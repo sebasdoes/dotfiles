@@ -1,0 +1,107 @@
+
+* {
+    background-alt:              @selected-active-background; // Buttons background
+    selected:                    @selected-normal-background; // Button selected
+    active:                      @selected-urgent-background; // Window activated
+    urgent:                      @selected-normal-background; // When hovering the activated window (maybe more?)
+
+    text-selected:               @background;
+    text:                        @foreground;
+
+    shade-shadow:                white / 6%;
+    shade-bg:                    white / 12%;
+    shade-border:                white / 24%;
+
+    /* Catppuccin Mocha */
+    background: #1e1e2e;
+    foreground: #cdd6f4;
+    selected: @foreground;
+
+    cursor: #f9e2af;
+    color0: #1e1e2e;
+    color1: #f38ba8;
+    color2: #cba6f7;
+    color3: #f9e2af;
+    color4: #89b4fa;
+    color5: #f38ba8;
+    color6: #94e2d5;
+    color7: #cdd6f4;
+    color8: #6c7086;
+    color9: #f38ba8;
+    color10: #a6e3a1;
+    color11: #f9e2af;
+    color12: #89b4fa;
+    color13: #cba6f7;
+    color14: #94e2d5;
+    color15: #a6adc8;
+}
+
+window {
+    fullscreen:                  false;
+    transparency:                "real";
+    cursor:                      "default";
+    background-color:            black / 12%;
+    border:                      0px;
+    border-color:                @selected;
+}
+
+/* Elements ----------------------------------------------------- */
+element normal.normal,
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  @text;
+}
+
+element selected.normal {
+    background-color:            @shade-bg;
+    text-color:                  white;
+    border:                      1px solid;
+    border-color:                @selected;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+/* Listview ---------------------------------------------------- */
+
+listview {
+  border:                        0px;
+}
+
+/* Scrollbar ---------------------------------------------------- */
+scrollbar {
+    margin:                      0px 4px;
+    handle-width:                8px;
+    handle-color:                white;
+    background-color:            @shade-shadow;
+    border-radius:               4px;
+}
+
+/* Message ------------------------------------------------------ */
+message {
+    background-color:            @shade-bg;
+    border:                      1px solid;
+    border-color:                transparent;
+    border-radius:               12px;
+    padding:                     24px;
+}
+error-message {
+    padding:                     100px;
+    border:                      0px solid;
+    border-radius:               0px;
+    background-color:            black / 10%;
+    text-color:                  @text;
+}
+textbox {
+    background-color:            transparent;
+    text-color:                  @text;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    highlight:                   none;
+}
