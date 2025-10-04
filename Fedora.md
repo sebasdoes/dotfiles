@@ -23,6 +23,11 @@ sudo yum install -y starship foot kitty hyprland rofi waybar wlogout hyprlock hy
 
 flatpak install flathub com.bitwarden.desktop
 flatpak install flathub md.obsidian.Obsidian
+flatpak install flathub com.bambulab.BambuStudio
+flatpak install flathub com.spotify.Client
+
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
 
 ```
 

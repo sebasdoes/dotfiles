@@ -12,14 +12,14 @@
 }
 {
     "label" : "logout",
-    "action" : "loginctl kill-session $XDG_SESSION_ID",
+    "action" : "loginctl terminate-user \"\"",
     "text" : "Logout",
     "keybind" : "e"
 }
 {
     "label" : "hibernate",
-    "action" : "swaylock -f && systemctl hibernate",
-    "text" : "Hibernate",
+    "action" : "hyprlock && systemctl suspend",
+    "text" : "Suspend",
     "keybind" : "h"
 }
 {

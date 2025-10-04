@@ -28,8 +28,10 @@
     	"group/motherboard",
     	"custom/separator#blank",
     	"group/laptop",
+    	"power-profiles-daemon",
     	"custom/separator#blank", 
-    	"group/audio",
+    	"custom/separator#blank", 
+    	"pulseaudio",
     	"custom/separator#blank",
     	"custom/power"
     ],
