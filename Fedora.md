@@ -17,7 +17,9 @@ cp dotfiles/home/.local/bin/* ~/.local/bin/
 chsh -s $(which zsh)
 
 curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz
+curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/GeistMono.tar.xz
 tar -xz JetBrainsMono.tar.xz -C ~/.local/share/fonts
+tar -xz GeistMono.tar.xz -C ~/.local/share/fonts
 
 sudo yum install -y starship foot kitty hyprland rofi waybar wlogout hyprlock hypridle pypr grimblast swaync pavucontrol pamixer
 
@@ -31,3 +33,68 @@ echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com
 
 ```
 
+## Hibernate
+
+This does not work with secure boot
+
+```shell
+# Create swap on btrfs
+sudo btrfs filesystem mkswapfile --size 16G /swapfile
+
+# Find offset
+sudo btrfs inspect-internal map-swapfile -r /swapfile
+
+# Edit fstab
+[...]
+/swapfile none swap defaults 0 0
+
+# Edit /etc/default/grub
+[...]
+GRUB_CMDLINE_LINUX="rhgb quiet resume=UUID=a1044756-8897-4c6b-acf3-fe2686ccaa1b resume_offset=3819479"
+[...]
+
+# Regenerate grub
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+
+# Regenerate dracut
+sudo dracut --regenerate-all --force
+```
+
+This works in theory, but resume does not work because `/boot/efi` and `/boot` are mounted before hibernating
+
+`/etc/systemd/system/root-resume.service`:
+```
+[Unit]
+Description=Local system resume actions
+After=suspend.target hibernate.target
+
+[Service]
+Type=simple
+ExecStart=mount /boot
+ExecStart=mount /boot/efi
+
+[Install]
+WantedBy=suspend.target hibernate.target
+```
+
+`/etc/systemd/system/root-suspend.service`:
+```
+[Unit]
+Description=Local system suspend actions
+Before=sleep.target
+
+[Service]
+Type=simple
+ExecStart=umount /boot/efi
+ExecStart=umount /boot
+
+[Install]
+WantedBy=sleep.target
+```
+
+`/usr/lib/systemd/logind.conf`:
+```
+[...]
+HandleLidSwitch=sleep
+[...]
+```

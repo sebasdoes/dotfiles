@@ -38,7 +38,7 @@
 
 window {
     fullscreen:                  false;
-    transparency:                "real";
+    //transparency:                "real";
     cursor:                      "default";
     background-color:            black / 12%;
     border:                      0px;

@@ -1,7 +1,7 @@
 /* config - Launcher */
 
 configuration {
-	modi:                         "drun,calc";
+	modi:                       "drun";
     show-icons:                 true;
     display-calc:               " ";
     display-drun:               " ";
@@ -24,7 +24,7 @@ window {
 /* Main Box --------------------------------------------------- */
 mainbox {
 
-    children:                    [ "inputbar", "message", "listview", "mode-switcher" ];
+    children:                    [ "inputbar", "message", "listview" ];
     background-color:            transparent;
 
     spacing:                     24px;
