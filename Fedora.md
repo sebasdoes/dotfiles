@@ -21,7 +21,7 @@ curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/GeistM
 tar -xz JetBrainsMono.tar.xz -C ~/.local/share/fonts
 tar -xz GeistMono.tar.xz -C ~/.local/share/fonts
 
-sudo yum install -y starship foot kitty hyprland rofi waybar wlogout hyprlock hypridle pypr grimblast swaync pavucontrol pamixer
+sudo yum install -y starship foot kitty hyprland rofi waybar wlogout hyprlock hypridle pypr grimblast swaync pavucontrol pamixer kanshi
 
 flatpak install flathub com.bitwarden.desktop
 flatpak install flathub md.obsidian.Obsidian
@@ -97,4 +97,22 @@ WantedBy=sleep.target
 [...]
 HandleLidSwitch=sleep
 [...]
+```
+
+
+`~/.config/systemd/user/kanshi.service`:
+```
+[Unit]
+Description=Kanshi display manager
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/kanshi
+Restart=always
+RestartSec=5
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/%U
+
+[Install]
+WantedBy=default.target
 ```
