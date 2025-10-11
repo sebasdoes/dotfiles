@@ -1,0 +1,15 @@
+[Unit]
+Description=samba mount for home 
+Requires=systemd-networkd.service
+After=network-online.target
+Wants=network-online.target
+
+[Mount]
+What=//nekobasu.lan/Media
+Where=/mnt/smb/media
+Options=vers=3,credentials=/home/sebas/.smb_creds,iocharset=utf8,rw,x-systemd.automount,uid=1000
+Type=cifs
+TimeoutSec=30
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+[Unit]
+Description=samba automount for books 
+
+[Automount]
+Where=/mnt/smb/books
+TimeoutIdleSec=0
+
+[Install]
+WantedBy=multi-user.target

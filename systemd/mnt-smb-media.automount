@@ -1,0 +1,9 @@
+[Unit]
+Description=samba automount for media 
+
+[Automount]
+Where=/mnt/smb/media
+TimeoutIdleSec=0
+
+[Install]
+WantedBy=multi-user.target

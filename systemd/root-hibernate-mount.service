@@ -1,0 +1,15 @@
+[Unit]
+Description=(un)mount /boot/efi and mount /boot at hibernation
+Before=hibernate.target
+StopWhenUnneeded=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=-/usr/bin/umount /boot/efi
+ExecStart=-/usr/bin/umount /boot
+ExecStop=-/usr/bin/mount /boot 
+ExecStop=-/usr/bin/mount /boot/efi 
+
+[Install]
+WantedBy=hibernate.target
