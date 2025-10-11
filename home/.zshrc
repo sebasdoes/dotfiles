@@ -62,10 +62,6 @@ else
   alias l='ls -la'
 fi
 
-if $(which bw &>/dev/null); then
-  alias bw_sshkeys="NODE_EXTRA_CA_CERTS=\"${HOME}/.local/lan_comp.crt\" bw_add_ssh_keys"
-fi
-
 if $(which bat &>/dev/null); then
   alias bat="bat --paging=never --style=auto"
   alias cat="bat --paging=never -p"
@@ -76,8 +72,7 @@ fi
 #fi
 
 if $(which kitty &>/dev/null); then
-  alias ssho="$(which ssh)"
-  alias ssh="kitty +kitten ssh"
+  alias sshk="kitty +kitten ssh"
   alias e="edit-in-kitty --type tab" 
 fi
 

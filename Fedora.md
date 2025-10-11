@@ -62,34 +62,23 @@ sudo dracut --regenerate-all --force
 
 This works in theory, but resume does not work because `/boot/efi` and `/boot` are mounted before hibernating
 
-`/etc/systemd/system/root-resume.service`:
+`/etc/systemd/system/root-hibernate-mount.service`:
 ```
 [Unit]
-Description=Local system resume actions
-After=suspend.target hibernate.target
+Description=(un)mount /boot/efi and mount /boot at hibernation
+Before=hibernate.target
+StopWhenUnneeded=yes
 
 [Service]
-Type=simple
-ExecStart=mount /boot
-ExecStart=mount /boot/efi
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=-/usr/bin/umount /boot/efi
+ExecStart=-/usr/bin/umount /boot
+ExecStop=-/usr/bin/mount /boot
+ExecStop=-/usr/bin/mount /boot/efi
 
 [Install]
-WantedBy=suspend.target hibernate.target
-```
-
-`/etc/systemd/system/root-suspend.service`:
-```
-[Unit]
-Description=Local system suspend actions
-Before=sleep.target
-
-[Service]
-Type=simple
-ExecStart=umount /boot/efi
-ExecStart=umount /boot
-
-[Install]
-WantedBy=sleep.target
+WantedBy=hibernate.target
 ```
 
 `/usr/lib/systemd/logind.conf`:

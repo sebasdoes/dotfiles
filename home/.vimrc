@@ -9,8 +9,9 @@ endif
 call plug#begin()
 
 Plug 'prabirshrestha/vim-lsp'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'rstacruz/vim-closer'
@@ -130,8 +131,9 @@ endif
 let g:despacio_Midnight = 1
 colorscheme despacio
 
-let g:airline_powerline_fonts = 1
-let g:airline_theme='base16'
+set laststatus=2
+"let g:airline_powerline_fonts = 1
+"let g:airline_theme='base16'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related

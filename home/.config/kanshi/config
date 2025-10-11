@@ -1,0 +1,23 @@
+# Profile: Laptop only (e.g., unplugged from dock)
+profile laptop_only {
+    # Laptop internal monitor
+    output "eDP-1" {
+        enable
+        scale 1
+    }
+}
+
+# Profile: Docked (e.g., with a dock and external monitor)
+profile docked {
+    # External monitor connected to dock
+    output "Samsung Electric Company C34H89x H4ZR402323" {
+        enable
+        mode 3440x1440@99.98 
+        scale 1
+    }
+
+    # Laptop internal monitor (disabled)
+    output "eDP-1" {
+        disable
+    }
+}
