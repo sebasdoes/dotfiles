@@ -19,6 +19,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-endwise'
 Plug 'airblade/vim-gitgutter'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
 call plug#end()
 
@@ -124,14 +125,16 @@ set background=dark
 set encoding=utf8
 set ffs=unix,dos,mac
 
-if empty(glob('~/.vim/colors/despacio.vim'))
-      silent execute '!curl -fLo ~/.vim/colors/despacio.vim --create-dirs https://raw.githubusercontent.com/AlessandroYorba/Despacio/refs/heads/master/colors/despacio.vim'
-endif
-
-let g:despacio_Midnight = 1
-colorscheme despacio
+"if empty(glob('~/.vim/colors/despacio.vim'))
+"      silent execute '!curl -fLo ~/.vim/colors/despacio.vim --create-dirs https://raw.githubusercontent.com/AlessandroYorba/Despacio/refs/heads/master/colors/despacio.vim'
+"endif
+"
+"let g:despacio_Midnight = 1
+"colorscheme despacio
+colorscheme catppuccin_mocha
 
 set laststatus=2
+let g:lightline = {'colorscheme': 'catppuccin_mocha'}
 "let g:airline_powerline_fonts = 1
 "let g:airline_theme='base16'
 
