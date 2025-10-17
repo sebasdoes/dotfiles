@@ -21,7 +21,10 @@ curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/GeistM
 tar -xz JetBrainsMono.tar.xz -C ~/.local/share/fonts
 tar -xz GeistMono.tar.xz -C ~/.local/share/fonts
 
-sudo yum install -y starship foot kitty hyprland rofi waybar wlogout hyprlock hypridle pypr grimblast swaync pavucontrol pamixer kanshi
+sudo yum install -y starship foot ghostty hyprland rofi waybar wlogout hyprlock hypridle pypr grimblast swaync pavucontrol pamixer kanshi
+
+dnf copr enable lihaohong/yazi
+dnf install yazi --setopt=install_weak_deps=False
 
 flatpak install flathub com.bitwarden.desktop
 flatpak install flathub md.obsidian.Obsidian

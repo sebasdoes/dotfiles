@@ -9,6 +9,7 @@ cp -R ~/.config/wlogout home/.config/
 cp -R ~/.config/kitty home/.config/
 cp -R ~/.config/ghostty home/.config/
 cp -R ~/.config/kanshi home/.config/
+cp -R ~/.config/yazi home/.config/
 
 # Files
 cp ~/.config/chrome-flags.conf home/.config/chrome-flags.conf
