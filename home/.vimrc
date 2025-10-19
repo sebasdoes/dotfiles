@@ -1,3 +1,5 @@
+set t_RB= t_RF= t_RV= t_u7=
+
 """"""
 " => Plugin manager
 """"""
@@ -9,9 +11,9 @@ endif
 call plug#begin()
 
 Plug 'prabirshrestha/vim-lsp'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'rstacruz/vim-closer'
@@ -135,8 +137,8 @@ colorscheme catppuccin_mocha
 
 set laststatus=2
 let g:lightline = {'colorscheme': 'catppuccin_mocha'}
-"let g:airline_powerline_fonts = 1
-"let g:airline_theme='base16'
+let g:airline_powerline_fonts = 1
+let g:airline_theme='catppuccin_mocha'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -279,11 +281,11 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => LSP 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if executable('ruff')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'ruff',
-        \ 'cmd': {server_info->['ruff', 'server']},
-        \ 'allowlist': ['python'],
-        \ 'workspace_config': {},
-        \ })
-endif
+"if executable('ruff')
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'ruff',
+"        \ 'cmd': {server_info->['ruff', 'server']},
+"        \ 'allowlist': ['python'],
+"        \ 'workspace_config': {},
+"        \ })
+"endif
