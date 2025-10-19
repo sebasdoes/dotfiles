@@ -1,3 +1,7 @@
+"""""
+" => Fixes
+"""""
+" Fix garbage output: https://github.com/vim/vim/issues/3197
 set t_RB= t_RF= t_RV= t_u7=
 
 """"""
