@@ -45,7 +45,7 @@ PATH="$HOME/.local/bin:$PATH"
 
 
 alias root="sudo -u root --preserve-env='SSH_CONNECTION' zsh"
-alias kgp="kubectl get pods"
+#alias kgp="kubectl get pods"
 
 
 # Modules
@@ -71,10 +71,10 @@ fi
 #  alias vim="nvim"
 #fi
 
-if $(which kitty &>/dev/null); then
-  alias sshk="kitty +kitten ssh"
-  alias e="edit-in-kitty --type tab" 
-fi
+#if $(which kitty &>/dev/null); then
+#  alias sshk="kitty +kitten ssh"
+#  alias e="edit-in-kitty --type tab" 
+#fi
 
 if $(which brew &>/dev/null); then
   eval "$($(which brew) shellenv)"
@@ -96,15 +96,8 @@ fi
 
 # Autocomplete
 autoload -U +X bashcompinit && bashcompinit
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-  autoload -Uz compinit
 
-  compinit
-fi
-
-# Autosuggestions
+## Autosuggestions
 if [ ! -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   ~/.local/bin/git_clone_if_needed -o 1 https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions &>/dev/null
 fi
@@ -112,13 +105,7 @@ if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
-
-## Load Angular CLI autocompletion.
-if $(which ng &>/dev/null); then
-  source <(ng completion script)
-fi
-
-# Needs to be at the end
+## Needs to be at the end
 if [ ! -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   ~/.local/bin/git_clone_if_needed -o 1 https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting &>/dev/null
 fi

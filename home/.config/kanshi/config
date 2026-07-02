@@ -21,3 +21,18 @@ profile docked {
         disable
     }
 }
+
+# Profile: Docked (e.g., with a dock and external monitor)
+profile glenn {
+    # External monitor connected to dock
+    output "Philips Consumer Electronics Company 27E1N1600AE UHB2527037084" {
+        enable
+        mode 2560x1440@99.98 
+        scale 1
+    }
+
+    # Laptop internal monitor (disabled)
+    output "eDP-1" {
+        disable
+    }
+}

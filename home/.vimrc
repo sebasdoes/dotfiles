@@ -17,7 +17,6 @@ call plug#begin()
 Plug 'prabirshrestha/vim-lsp'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'rstacruz/vim-closer'
@@ -285,11 +284,13 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => LSP 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"if executable('ruff')
-"    au User lsp_setup call lsp#register_server({
-"        \ 'name': 'ruff',
-"        \ 'cmd': {server_info->['ruff', 'server']},
-"        \ 'allowlist': ['python'],
-"        \ 'workspace_config': {},
-"        \ })
-"endif
+
+
+if executable('ruff')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'ruff',
+        \ 'cmd': {server_info->['ruff', 'server']},
+        \ 'allowlist': ['python'],
+        \ 'workspace_config': {},
+        \ })
+endif
